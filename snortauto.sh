@@ -117,7 +117,7 @@ if [ "$1" == "-t" ]; then
         libpcre2In
         threadIn
         snortIn
-        snortPersist "$2"
+        snortPersist $2
         createDirs
         echo "Install Finished, Happy sniffing!"
 elif [ "$1" == "-n" ]; then
@@ -125,7 +125,7 @@ elif [ "$1" == "-n" ]; then
         libdaqIn
         libpcre2In
         snortInNoT
-        snortPersist "$2"
+        snortPersist $2
         createDirs
         echo "Install Finished, Happy sniffing!"
 elif [ "$1" == "-h" ] || [ "$1" == "--help" ]; then

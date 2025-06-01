@@ -79,14 +79,15 @@ snortInNoT(){
 
 ## Creates SystemD daemon to set adaptor in promisc mode on boot
 snortPersist(){
-        echo "Setting device as: $2" 
+        interface = "$1"
+        echo "Setting device as: interface" 
         echo "[Unit]
 Description=Set NIC in promiscuous mode and Disable GRO, LRO 
 After=network.target
 [Service]
 Type=oneshot
-ExecStart=/usr/sbin/ip link set dev "$2" promisc on
-ExecStart=/usr/sbin/ethtool -K "$2" gro off lro off
+ExecStart=/usr/sbin/ip link set dev $interface promisc on
+ExecStart=/usr/sbin/ethtool -K $interface gro off lro off
 TimeoutStartSec=0
 RemainAfterExit=yes
 [Install]
@@ -111,7 +112,7 @@ createDirs(){
 
 ## Main install loop
 
-if [ "$1" == "-t" ]; then
+if [ "$0" == "-t" ]; then
         preIn
         libdaqIn
         libpcre2In
@@ -120,15 +121,15 @@ if [ "$1" == "-t" ]; then
         snortPersist $2
         createDirs
         echo "Install Finished, Happy sniffing!"
-elif [ "$1" == "-n" ]; then
+elif [ "$0" == "-n" ]; then
         preIn
         libdaqIn
         libpcre2In
         snortInNoT
-        snortPersist $2
+        snortPersist $1
         createDirs
         echo "Install Finished, Happy sniffing!"
-elif [ "$1" == "-h" ] || [ "$1" == "--help" ]; then
+elif [ "$0" == "-h" ] || [ "$0" == "--help" ]; then
         echo ">Install Options:
         -t: installs with threating enabled (More performance, more memory usage)
         -n: installs without threading

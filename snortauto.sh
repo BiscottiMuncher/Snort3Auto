@@ -9,12 +9,12 @@ preIn(){
 
         # Make snort source install directory
 
-        mkdir /snort_src && cd /snort_src
+        mkdir snort_src/ && cd snort_src/
 }
 
 ## Clone Git repo for libdaq and Install
 libdaqIn(){
-        cd /snort_src
+        cd snort_src/
         git clone https://github.com/snort3/libdaq.git
         cd libdaq
         bash bootstrap
@@ -54,7 +54,7 @@ snortIn(){
         unzip master.zip
         cd snort3-master
         bash configure_cmake.sh --prefix=/usr/local --enable-tcmalloc
-        cd /snort3-master/build
+        cd snort3-master/build
         make
         make install
         ldconfig
@@ -69,7 +69,7 @@ snortInNoT(){
         unzip master.zip
         cd snort3-master
         bash configure_cmake.sh --prefix=/usr/local
-        cd /snort3-master/build
+        cd snort3-master/build
         make
         make install
         ldconfig
@@ -112,7 +112,7 @@ createDirs(){
 ## Main install loop
 
 if [ "$1" == "-t" ]; then
-         preIn
+        preIn
         libdaqIn
         libpcre2In
         threadIn
@@ -134,8 +134,7 @@ elif [ "$1" == "-h" ] || [ "$1" == "--help" ]; then
         -n: installs without threading
 
         Example: Installing with threading and binding to eth0
-          snortauto -t eth0
-"
+          snortauto -t eth0"
 else
         echo "run snortauto -h or snortauto --help for options"
 fi

@@ -9,12 +9,12 @@ preIn(){
 
         # Make snort source install directory
 
-        mkdir ~/snort_src && cd ~/snort_src
+        mkdir /snort_src && cd /snort_src
 }
 
 ## Clone Git repo for libdaq and Install
 libdaqIn(){
-        cd ~/snort_src
+        cd /snort_src
         git clone https://github.com/snort3/libdaq.git
         cd libdaq
         bash bootstrap
@@ -25,10 +25,11 @@ libdaqIn(){
 
 ## Install LIBPCRE
 libpcre2In(){
-        cd ~/snort_src
+        #cd ~/snort_src
+        cd ..
         wget https://github.com/PCRE2Project/pcre2/releases/download/pcre2-10.45/pcre2-10.45.zip
         unzip pcre2-10.45.zip
-        cd ~/snort_src/pcre2-10.45/
+        cd pcre2-10.45/
         bash configure
         make
         make install
@@ -37,7 +38,7 @@ libpcre2In(){
 
 ## Install Thread caching if arg is found
 threadIn(){
-        cd ~/snort_src
+        cd ..
         wget https://github.com/gperftools/gperftools/releases/download/gperftools-2.9.1/gperftools-2.9.1.tar.gz
         tar xzf gperftools-2.9.1.tar.gz
         cd gperftools-2.9.1/
@@ -48,12 +49,12 @@ threadIn(){
 
 ## Download Snort then install
 snortIn(){
-        cd ~/
+        cd ..
         wget https://github.com/snort3/snort3/archive/refs/heads/master.zip
         unzip master.zip
         cd snort3-master
         bash configure_cmake.sh --prefix=/usr/local --enable-tcmalloc
-        cd ~/snort3-master/build
+        cd /snort3-master/build
         make
         make install
         ldconfig
@@ -63,12 +64,12 @@ snortIn(){
 
 ## Non-Threaded install
 snortInNoT(){
-        cd ~/
+        cd ..
         wget https://github.com/snort3/snort3/archive/refs/heads/master.zip
         unzip master.zip
         cd snort3-master
         bash configure_cmake.sh --prefix=/usr/local
-        cd ~/snort3-master/build
+        cd /snort3-master/build
         make
         make install
         ldconfig

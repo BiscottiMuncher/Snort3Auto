@@ -15,6 +15,8 @@ preIn(){
 ## Clone Git repo for libdaq and Install
 libdaqIn(){
         cd snort_src/
+        sleep 5
+        pwd
         git clone https://github.com/snort3/libdaq.git
         cd libdaq
         bash bootstrap
@@ -27,6 +29,8 @@ libdaqIn(){
 libpcre2In(){
         #cd ~/snort_src
         cd ..
+        sleep 5
+        pwd
         wget https://github.com/PCRE2Project/pcre2/releases/download/pcre2-10.45/pcre2-10.45.zip
         unzip pcre2-10.45.zip
         cd pcre2-10.45/
@@ -39,6 +43,8 @@ libpcre2In(){
 ## Install Thread caching if arg is found
 threadIn(){
         cd ..
+        sleep 5
+        pwd
         wget https://github.com/gperftools/gperftools/releases/download/gperftools-2.9.1/gperftools-2.9.1.tar.gz
         tar xzf gperftools-2.9.1.tar.gz
         cd gperftools-2.9.1/
@@ -50,6 +56,8 @@ threadIn(){
 ## Download Snort then install
 snortIn(){
         cd ..
+        sleep 5
+        pwd
         wget https://github.com/snort3/snort3/archive/refs/heads/master.zip
         unzip master.zip
         cd snort3-master
@@ -65,6 +73,8 @@ snortIn(){
 ## Non-Threaded install
 snortInNoT(){
         cd ..
+        sleep 5
+        pwd
         wget https://github.com/snort3/snort3/archive/refs/heads/master.zip
         unzip master.zip
         cd snort3-master
@@ -112,7 +122,7 @@ createDirs(){
 ## Main install loop
 
 if [ "$1" == "-t" ]; then
-        preIn
+        preIn #Make snort_src
         libdaqIn
         libpcre2In
         threadIn
